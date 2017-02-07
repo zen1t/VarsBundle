@@ -1,0 +1,8 @@
+services:
+    zent.sonata.admin.vars:
+        class: Zent\VarsBundle\Admin\VarsAdmin
+        arguments: [~, Zent\VarsBundle\Entity\Vars, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Vars }
+        calls:
+            - ["setVarsService", ["@zent.vars"]]
