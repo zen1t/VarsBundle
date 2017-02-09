@@ -3,12 +3,9 @@
 namespace Zent\VarsBundle\Model;
 
 use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
-use Zent\VarsBundle\Services\VarsManager;
 
 abstract class Vars implements VarsInterface
 {
-
     /**
      * @var integer
      */

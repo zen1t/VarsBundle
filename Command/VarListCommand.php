@@ -29,5 +29,4 @@ class VarListCommand extends ContainerAwareCommand
         }
         $table->render();
     }
-
 }

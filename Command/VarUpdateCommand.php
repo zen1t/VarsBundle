@@ -2,7 +2,6 @@
 
 namespace Zent\VarsBundle\Command;
 
-use Doctrine\ORM\EntityNotFoundException;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputArgument;
@@ -21,11 +20,9 @@ class VarUpdateCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $em = $this->getContainer()->get('doctrine.orm.entity_manager');
         $name = $input->getArgument('name');
         $value = $input->getArgument('value');
         $this->getContainer()->get('zent.vars_manager')->update($name, $value);
         $output->writeln('Update success');
     }
-
 }

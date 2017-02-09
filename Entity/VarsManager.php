@@ -104,7 +104,7 @@ class VarsManager
      */
     public function getVar($name, $default = '')
     {
-        if ($this->cache and $this->cache->contains($name)) {
+        if ($this->cache && $this->cache->contains($name)) {
             return $this->cache->fetch($name);
         }
 

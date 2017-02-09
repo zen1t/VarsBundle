@@ -25,7 +25,6 @@ class ZentVarsExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        //$container->setParameter('zent.entity.vars.class', $config['class']);
         $vars = $container->setDefinition('zent.vars_manager',
             new Definition(VarsManager::class,
                 [new Reference('doctrine.orm.entity_manager'), $config['class']]));
