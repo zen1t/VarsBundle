@@ -1,3 +1,5 @@
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/32f41351-fcad-4c5f-a446-30f74d72d301/big.png)](https://insight.sensiolabs.com/projects/32f41351-fcad-4c5f-a446-30f74d72d301)
+
 ##### Step 1: Download ZentVarsBundle using composer 
 ``
 composer require zent/vars-bundle "~0.2"
