@@ -2,7 +2,7 @@
 
 namespace Zent\VarsBundle\Admin;
 
-use Zent\VarsBundle\Services\VarsService;
+use Zent\VarsBundle\Entity\VarsManager;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -11,6 +11,9 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class VarsAdmin extends AbstractAdmin
 {
+    /** @var VarsManager */
+    private $varsManager;
+
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -63,21 +66,21 @@ class VarsAdmin extends AbstractAdmin
     }
 
 
-    public function setVarsService(VarsService $varsService)
+    public function setVarsManager(VarsManager $varsManager)
     {
-        $this->varsService = $varsService;
+        $this->varsManager = $varsManager;
     }
 
     /**
-     * @return VarsService
+     * @return VarsManager
      */
-    public function getVarsService()
+    public function getVarsManager()
     {
-        return $this->varsService;
+        return $this->varsManager;
     }
 
     public function postUpdate($vars)
     {
-        $this->getVarsService()->initCacheVar($vars);
+        $this->getVarsManager()->initCacheVar($vars);
     }
 }

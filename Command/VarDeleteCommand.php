@@ -22,15 +22,8 @@ class VarDeleteCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
-        $var = $em->getRepository('ZentVarsBundle:Vars')
-            ->findOneBy(['name' => $input->getArgument('name')]);
-
-        if (!$var) {
-            throw new EntityNotFoundException();
-        }
-
-        $em->remove($var);
-        $em->flush();
-        $output->writeln('Delete var: '.$var->getName());
+        $name = $input->getArgument('name');
+        $this->getContainer()->get('zent.vars_manager')->delete($name);
+        $output->writeln('Delete success');
     }
 }

@@ -19,7 +19,7 @@ class VarListCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $vars = $this->getContainer()->get('zent.vars')->getVars();
+        $vars = $this->getContainer()->get('zent.vars_manager')->getVars();
 
         $table = new Table($output);
         $table->setHeaders(['name', 'value']);

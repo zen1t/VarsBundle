@@ -1,32 +1,63 @@
-Download:
-<pre>
-composer require zent/vars-bundle
-</pre>
+##### Step 1: Download ZentVarsBundle using composer 
+``
+composer require zent/vars-bundle "~0.2"
+``
+##### Step 2: Enable the bundle
+Enable the bundle in the kernel:
+````
+<?php
+// app/AppKernel.php
 
-Enable in AppKernel:
-<pre>
-$bundles = array(
+public function registerBundles()
+{
+    $bundles = array(
         // ...
-       new Zent\VarsBundle\ZentVarsBundle(),
-);
-</pre>
+        new Zent\VarsBundle\ZentVarsBundle(),
+        // ...
+    );
+}
+````
 
-Usage with cache (optional):
-https://symfony.com/doc/current/bundles/DoctrineCacheBundle/reference.html
-<pre>
+##### Step 3: Create your Vars class
+````
+// src/AppBundle/Entity/Vars.php
+use Zent\VarsBundle\Entity\BaseVars;
+
+class Vars extended BaseVars
+{
+}
+````
+
+##### Step 4: Configure the ZentVarsBundle
+
+````
 # app/config/config.yml
-doctrine_cache:
-    providers:
-        vars_query_cache:
-            type: file_system
-            namespace: query_cache_ns
 zent_vars:
-  cache_provider: doctrine_cache.providers.vars_query_cache
-</pre>
+    class: AppBunde\Entity\Vars
+    cache_provider: doctrine_cache.providers.vars_query_cache # or other (optional)
 
-Call:
-<pre>
-$this->container->get('zent.vars')->getVar('first_var');
-or
-$this->container->get('zent.vars')->getVar('first_var', 10); //return if var not found 
-</pre>
+````
+
+##### Step 5: Update your database schema
+- Cache provider is not required. 
+List providers: https://symfony.com/doc/current/bundles/DoctrineCacheBundle/reference.html
+
+#### Usage
+
+##### Accessing the User Manager service
+``
+$varsManager = $container->get('zent.vars_manager');
+``
+##### Get value Var
+````
+$user = $userManager->getVar('first');
+$user = $userManager->getVar('first',10); //return '10' if var not found 
+````
+
+#### Command Line Tools
+````
+php app/console zent:vars:create email_owner test@example.com "Email владельца"
+php app/console zent:vars:update email_owner test@test.com
+php app/console zent:vars:delete email_owner
+php app/console zent:vars:list
+````

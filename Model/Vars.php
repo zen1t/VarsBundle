@@ -1,43 +1,31 @@
 <?php
 
-namespace Zent\VarsBundle\Entity;
+namespace Zent\VarsBundle\Model;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
+use Zent\VarsBundle\Services\VarsManager;
 
-/**
- * Vars
- * @ORM\Table(name="ars_vars")
- * @ORM\Entity(repositoryClass="Zent\VarsBundle\Repository\VarsRepository")
- * @ORM\HasLifecycleCallbacks
- */
-class Vars
+abstract class Vars implements VarsInterface
 {
-    use Timestampable;
 
     /**
      * @var integer
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
-     * @ORM\Column(type="string", unique=true)
      */
     private $name;
 
     /**
      * @var string
-     * @ORM\Column(type="string")
      */
     private $value;
 
     /**
      * @var string
-     * @ORM\Column(type="string", nullable=false)
      */
     private $title = '';
 

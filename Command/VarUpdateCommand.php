@@ -22,15 +22,10 @@ class VarUpdateCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
-        $value = $input->getArgument('name');
-        $var = $this->getContainer()->get('zent.vars')->getRepo()->findOneBy(['name' => $value]);
-
-        if (!$var) {
-            throw new EntityNotFoundException();
-        }
-
-        $var->setValue($value);
-        $em->flush();
+        $name = $input->getArgument('name');
+        $value = $input->getArgument('value');
+        $this->getContainer()->get('zent.vars_manager')->update($name, $value);
+        $output->writeln('Update success');
     }
 
 }

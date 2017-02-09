@@ -25,8 +25,8 @@ class VarCreateCommand extends ContainerAwareCommand
         $name = $input->getArgument('name');
         $value = $input->getArgument('value');
         $info = $input->getArgument('info') ?: '';
-        $this->getContainer()->get('zent.vars')->create($name, $value, $info);
-        $output->writeln('Create var: '.$name);
+        $this->getContainer()->get('zent.vars_manager')->create($name, $value, $info);
+        $output->writeln('Create success');
     }
 
 }

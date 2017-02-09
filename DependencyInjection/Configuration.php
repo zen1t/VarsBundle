@@ -18,9 +18,10 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('ars_vars');
+        $rootNode = $treeBuilder->root('zent_vars');
         $rootNode
             ->children()
+            ->scalarNode('class')->isRequired()->cannotBeEmpty()->end()
             ->scalarNode('cache_provider')->end()
             ->end();
         // Here you should define the parameters that are allowed to

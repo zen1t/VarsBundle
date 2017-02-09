@@ -2,7 +2,7 @@
 
 namespace Zent\VarsBundle\DependencyInjection;
 
-use Zent\VarsBundle\Services\VarsService;
+use Zent\VarsBundle\Entity\VarsManager;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Definition;
@@ -24,8 +24,11 @@ class ZentVarsExtension extends Extension
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
-        $vars = $container->setDefinition('zent.vars',
-            new Definition(VarsService::class, [new Reference('doctrine.orm.entity_manager')]));
+
+        //$container->setParameter('zent.entity.vars.class', $config['class']);
+        $vars = $container->setDefinition('zent.vars_manager',
+            new Definition(VarsManager::class,
+                [new Reference('doctrine.orm.entity_manager'), $config['class']]));
 
         if (isset($config['cache_provider'])) {
             $vars->addMethodCall('setCacheProvider', [new Reference($config['cache_provider'])]);
