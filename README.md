@@ -37,10 +37,10 @@ zent_vars:
     cache_provider: doctrine_cache.providers.vars_query_cache # or other (optional)
 
 ````
-
-##### Step 5: Update your database schema
 - Cache provider is not required. 
 List providers: https://symfony.com/doc/current/bundles/DoctrineCacheBundle/reference.html
+
+##### Step 5: Update your database schema
 
 #### Usage
 
@@ -50,8 +50,8 @@ $varsManager = $container->get('zent.vars_manager');
 ``
 ##### Get value Var
 ````
-$user = $userManager->getVar('first');
-$user = $userManager->getVar('first',10); //return '10' if var not found 
+$var = $varsManager->getVar('first');
+$var = $varsManager->getVar('first',10); //return '10' if var not found 
 ````
 
 #### Command Line Tools
