@@ -17,19 +17,19 @@ use Doctrine\ORM\EntityNotFoundException;
 class VarsManager
 {
     /** @var EntityManager */
-    private $em;
+    protected $em;
 
     /** @var array */
-    private $vars = [];
+    protected $vars = [];
 
     /** @var CacheProvider */
-    private $cache = null;
+    protected $cache = null;
 
     /** @var EntityRepository */
-    private $repository;
+    protected $repository;
 
     /** @var string */
-    private $class;
+    protected $class;
 
     /**
      * @param EntityManager $entityManager
@@ -65,6 +65,14 @@ class VarsManager
     public function getClass()
     {
         return $this->class;
+    }
+
+    /**
+     * @return EntityRepository
+     */
+    public function getRepo()
+    {
+        return $this->repository;
     }
 
     /**
@@ -110,7 +118,7 @@ class VarsManager
 
         if (!$this->vars) {
             $var = $this->get($name);
-            $value = $var ? $var['value'] : $default;
+            $value = $var ? $var->getValue() : $default;
         } else {
             $value = isset($this->vars[$name]) ? $this->vars[$name] : $default;
         }

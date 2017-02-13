@@ -2,7 +2,7 @@
 
 ##### Step 1: Download ZentVarsBundle using composer 
 ``
-composer require zent/vars-bundle "~0.2"
+composer require zent/vars-bundle dev-master
 ``
 ##### Step 2: Enable the bundle
 Enable the bundle in the kernel:
