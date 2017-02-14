@@ -1,8 +1,15 @@
 services:
-    zent.sonata.admin.vars:
+    zent_vars.manager:
+        class: Zent\VarsBundle\Entity\VarsManager
+        arguments:
+          - "@doctrine.orm.default_entity_manager"
+          - "%zent_vars.class%"
+          - "@?zent_vars.cache"
+
+    zent_vars.sonata.admin:
         class: Zent\VarsBundle\Admin\VarsAdmin
-        arguments: [~, Zent\VarsBundle\Entity\Vars, SonataAdminBundle:CRUD]
+        arguments: [~, "%zent_vars.class%", SonataAdminBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: admin, label: Vars }
+            - { name: sonata.admin, manager_type: orm, group: Переменые, label: Список }
         calls:
-            - ["setVarsManager", ["@zent.vars_manager"]]
+            - ["setVarsManager", ["@zent_vars.manager"]]

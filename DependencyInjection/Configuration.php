@@ -22,7 +22,6 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
             ->scalarNode('class')->isRequired()->cannotBeEmpty()->end()
-            ->scalarNode('cache_provider')->end()
             ->end();
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for

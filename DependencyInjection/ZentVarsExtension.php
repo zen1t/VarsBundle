@@ -2,6 +2,9 @@
 
 namespace Zent\VarsBundle\DependencyInjection;
 
+use Symfony\Component\DependencyInjection\Exception\BadMethodCallException;
+use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 use Zent\VarsBundle\Entity\VarsManager;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -19,22 +22,19 @@ class ZentVarsExtension extends Extension
 {
     /**
      * {@inheritDoc}
+     * @throws BadMethodCallException
+     * @throws InvalidArgumentException
+     * @throws \Exception
+     * @throws ServiceNotFoundException
      */
     public function load(array $configs, ContainerBuilder $container)
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $vars = $container->setDefinition('zent.vars_manager',
-            new Definition(VarsManager::class,
-                [new Reference('doctrine.orm.entity_manager'), $config['class']]));
+        $container->setParameter('zent_vars.class',$config['class']);
 
-        if (isset($config['cache_provider'])) {
-            $vars->addMethodCall('setCacheProvider', [new Reference($config['cache_provider'])]);
-        }
-
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.
-            '/../Resources/config'));
+        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
     }
 }

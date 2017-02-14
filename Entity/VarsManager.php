@@ -23,7 +23,7 @@ class VarsManager
     protected $vars = [];
 
     /** @var CacheProvider */
-    protected $cache = null;
+    protected $cache;
 
     /** @var EntityRepository */
     protected $repository;
@@ -33,30 +33,17 @@ class VarsManager
 
     /**
      * @param EntityManager $entityManager
+     * @param string        $class
+     * @param CacheProvider|null          $cache
      */
-    public function __construct(EntityManager $entityManager, $class)
+    public function __construct(EntityManager $entityManager, $class, $cache = null)
     {
         $this->em = $entityManager;
         $this->repository = $entityManager->getRepository($class);
+        $this->cache = $cache;
 
         $metadata = $entityManager->getClassMetadata($class);
         $this->class = $metadata->getName();
-    }
-
-    /**
-     * @param CacheProvider $cacheProvider
-     */
-    public function setCacheProvider(CacheProvider $cacheProvider)
-    {
-        $this->cache = $cacheProvider;
-    }
-
-    /**
-     * @return CacheProvider
-     */
-    public function getCacheProvider()
-    {
-        return $this->cache;
     }
 
     /**
@@ -110,7 +97,7 @@ class VarsManager
      * @param string $default
      * @return string
      */
-    public function getVar($name, $default = '')
+    public function getValue($name, $default = '')
     {
         if ($this->cache && $this->cache->contains($name)) {
             return $this->cache->fetch($name);
@@ -173,7 +160,7 @@ class VarsManager
 
     /**
      * @param $name
-     * @return null|object
+     * @return null|VarsInterface
      */
     public function get($name)
     {

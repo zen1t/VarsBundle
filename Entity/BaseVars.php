@@ -100,7 +100,7 @@ abstract class BaseVars implements VarsInterface
     /**
      * Set name
      * @param string $name
-     * @return Vars
+     * @return $this
      */
     public function setName($name)
     {
@@ -121,7 +121,7 @@ abstract class BaseVars implements VarsInterface
     /**
      * Set value
      * @param string $value
-     * @return Vars
+     * @return $this
      */
     public function setValue($value)
     {
@@ -142,7 +142,7 @@ abstract class BaseVars implements VarsInterface
     /**
      * Set title
      * @param string $title
-     * @return Vars
+     * @return $this
      */
     public function setTitle($title)
     {

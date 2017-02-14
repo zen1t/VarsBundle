@@ -31,16 +31,23 @@ class Vars extended BaseVars
 ````
 
 ##### Step 4: Configure the ZentVarsBundle
-
 ````
 # app/config/config.yml
 zent_vars:
     class: AppBunde\Entity\Vars
-    cache_provider: doctrine_cache.providers.vars_query_cache # or other (optional)
-
 ````
-- Cache provider is not required. 
-List providers: https://symfony.com/doc/current/bundles/DoctrineCacheBundle/reference.html
+
+If you need additional caching:
+````
+doctrine_cache:
+    providers:
+        zent_vars_query_cache:
+            type: apc
+            namespace: query_cache_ns
+            alias:
+              - zent_vars.cache
+````
+Doc: https://symfony.com/doc/current/bundles/DoctrineCacheBundle/reference.html
 
 ##### Step 5: Update your database schema
 
@@ -48,12 +55,12 @@ List providers: https://symfony.com/doc/current/bundles/DoctrineCacheBundle/refe
 
 ##### Accessing the User Manager service
 ``
-$varsManager = $container->get('zent.vars_manager');
+$varsManager = $container->get('zent_vars.manager');
 ``
 ##### Get value Var
 ````
-$var = $varsManager->getVar('first');
-$var = $varsManager->getVar('first',10); //return '10' if var not found 
+$var = $varsManager->getValue('first');
+$var = $varsManager->getValue('first', 10); //return '10' if var not found 
 ````
 
 #### Command Line Tools

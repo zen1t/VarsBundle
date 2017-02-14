@@ -11,7 +11,7 @@ interface VarsInterface
     /**
      * Set name
      * @param string $name
-     * @return Vars
+     * @return $this
      */
     public function setName($name);
 
@@ -24,7 +24,7 @@ interface VarsInterface
     /**
      * Set value
      * @param string $value
-     * @return Vars
+     * @return $this
      */
     public function setValue($value);
 
@@ -37,7 +37,7 @@ interface VarsInterface
     /**
      * Set title
      * @param string $title
-     * @return Vars
+     * @return $this
      */
     public function setTitle($title);
 

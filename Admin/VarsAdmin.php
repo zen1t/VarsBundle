@@ -2,18 +2,21 @@
 
 namespace Zent\VarsBundle\Admin;
 
+use Sonata\AdminBundle\Admin\Admin;
 use Zent\VarsBundle\Entity\VarsManager;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class VarsAdmin extends AbstractAdmin
+class VarsAdmin extends Admin
 {
     /** @var VarsManager */
     private $varsManager;
 
+   // protected $baseRouteName = 'zent_vars';
+   // protected $baseRoutePattern = 'zent/vars';
+   // protected $baseRoutePattern = 'your_name';
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -52,7 +55,8 @@ class VarsAdmin extends AbstractAdmin
 
         $formMapper
             ->add('value')
-            ->add('title');
+            ->add('title','text')
+        ;
     }
 
     /**
