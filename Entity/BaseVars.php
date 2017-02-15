@@ -4,12 +4,13 @@ namespace Zent\VarsBundle\Entity;
 
 use Zent\VarsBundle\Model\VarsInterface;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * Class BaseVars
  * @package Zent\VarsBundle\Entity
  * @ORM\MappedSuperclass
  * @ORM\HasLifecycleCallbacks
+ * @UniqueEntity("name")
  */
 abstract class BaseVars implements VarsInterface
 {
