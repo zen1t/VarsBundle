@@ -14,9 +14,6 @@ class VarsAdmin extends Admin
     /** @var VarsManager */
     private $varsManager;
 
-   // protected $baseRouteName = 'zent_vars';
-   // protected $baseRoutePattern = 'zent/vars';
-   // protected $baseRoutePattern = 'your_name';
     /**
      * @param DatagridMapper $datagridMapper
      */
