@@ -54,13 +54,16 @@ Doc: https://symfony.com/doc/current/bundles/DoctrineCacheBundle/reference.html
 #### Usage
 
 ##### Accessing the User Manager service
-``
-$varsManager = $container->get('zent_vars.manager');
-``
-##### Get value Var
 ````
+$varsManager = $container->get('zent_vars.manager');
 $var = $varsManager->getValue('first');
 $var = $varsManager->getValue('first', 10); //return '10' if var not found 
+````
+
+##### Twig
+
+````
+{{ vars('first') }}
 ````
 
 #### Command Line Tools
